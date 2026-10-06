@@ -1,0 +1,15 @@
+{
+  "name": "trendlyinside",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TrendlyInside - AI Creator Intelligence Platform",
+  "scripts": {
+    "start": "npm --prefix server run start",
+    "server": "npm --prefix server run start",
+    "client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix server test"
+  }
+}
