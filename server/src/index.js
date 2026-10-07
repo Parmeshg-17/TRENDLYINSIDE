@@ -15,10 +15,18 @@ const analyticsRoutes = require('./routes/analytics');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust reverse proxy (Cloudflare, AWS, Heroku, Railway, Render, Nginx)
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet({
   crossOriginEmbedderPolicy: false,
   contentSecurityPolicy: false,
+  hsts: process.env.NODE_ENV === 'production' ? {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true,
+  } : false,
 }));
 
 // CORS
@@ -66,9 +74,26 @@ const healthHandler = (req, res) => {
 app.get('/health', healthHandler);
 app.get('/api/v1/health', healthHandler);
 
+const contactRoutes = require('./routes/contact');
+const path = require('path');
+const fs = require('fs');
+
+// HTTPS redirect in production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    const proto = req.headers['x-forwarded-proto'] || (req.secure ? 'https' : 'http');
+    if (proto === 'http') {
+      const host = req.headers.host || req.hostname;
+      return res.redirect(301, `https://${host}${req.url}`);
+    }
+  }
+  next();
+});
+
 // Phase 1 & Phase 2 Routes
 app.use('/api/v1/analyze', analyzeRoutes);
 app.use('/api/v1/generate', generateRoutes);
+app.use('/api/v1/contact', contactRoutes);
 
 // Phase 3 Routes
 app.use('/api/v1/assistant', assistantRoutes);
@@ -77,7 +102,58 @@ app.use('/api/v1/database', databaseRoutes);
 app.use('/api/v1/benchmark', benchmarkRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
 
-// 404 handler
+// Static Client Serving & Real HTTP 404 Status Handling
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
+const VALID_CLIENT_ROUTES = new Set([
+  '/',
+  '/youtube-video-analyzer',
+  '/youtube-shorts-analyzer',
+  '/youtube-channel-analyzer',
+  '/hook-generator',
+  '/viral-idea-generator',
+  '/growth-roadmap-generator',
+  '/instagram-reel-analyzer',
+  '/tiktok-analyzer',
+  '/thumbnail-analyzer',
+  '/competitor-analyzer',
+  '/trend-discovery',
+  '/content-calendar-generator',
+  '/creator-assistant',
+  '/trend-prediction',
+  '/viral-database',
+  '/creator-benchmarking',
+  '/advanced-analytics',
+  '/blog',
+  '/about',
+  '/contact',
+  '/thank-you',
+  '/privacy',
+  '/privacy-policy',
+  '/terms',
+  '/sitemap.xml',
+  '/robots.txt'
+]);
+
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next();
+    if (req.path.startsWith('/api/')) return next();
+    const isBlog = req.path.startsWith('/blog/');
+    const isValid = VALID_CLIENT_ROUTES.has(req.path) || isBlog;
+    const indexPath = path.join(clientDistPath, 'index.html');
+
+    if (isValid) {
+      res.status(200).sendFile(indexPath);
+    } else {
+      // Returns real HTTP 404 status code while rendering the React 404 SPA view
+      res.status(404).sendFile(indexPath);
+    }
+  });
+}
+
+// 404 handler for API routes
 app.use((req, res) => {
   res.status(404).json({
     success: false,

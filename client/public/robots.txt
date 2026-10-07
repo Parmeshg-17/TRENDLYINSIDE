@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Private, internal & confirmation routes
+Disallow: /api/
+Disallow: /thank-you
+Disallow: /admin
+
 Sitemap: https://trendlyinside.com/sitemap.xml

@@ -30,11 +30,19 @@ const AboutPage               = lazy(() => import('./pages/About'));
 const ContactPage             = lazy(() => import('./pages/Contact'));
 const PrivacyPage             = lazy(() => import('./pages/Legal').then(m => ({ default: m.PrivacyPage })));
 const TermsPage               = lazy(() => import('./pages/Legal').then(m => ({ default: m.TermsPage })));
+const ThankYouPage            = lazy(() => import('./pages/ThankYou'));
+const NotFoundPage            = lazy(() => import('./pages/NotFound'));
 
-/* ── Scroll restoration ── */
-function ScrollToTop() {
+import CookieConsent from './components/CookieConsent';
+import { trackPageView } from './lib/analytics';
+
+/* ── Scroll restoration & GA4 pageview tracking ── */
+function RouteTracker() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    trackPageView(pathname);
+  }, [pathname]);
   return null;
 }
 
@@ -50,39 +58,11 @@ function PageLoader() {
   );
 }
 
-/* ── 404 page (Section 63) ── */
-function NotFoundPage() {
-  return (
-    <div className="flex items-center justify-center min-h-[72vh] flex-col gap-6 text-center px-4 py-16">
-      <div className="w-20 h-20 rounded-3xl bg-glacial-sky/20 border border-glacial-sky/40 flex items-center justify-center text-4xl shadow-sm">
-        🏔️
-      </div>
-      <div className="max-w-md">
-        <span className="badge-primary text-xs mb-3 inline-flex">Trail Not Found</span>
-        <h1 className="font-heading font-bold text-3xl md:text-4xl text-midnight-abyss mb-2">
-          Looks like this trail ends here.
-        </h1>
-        <p className="text-frosty-slate text-sm leading-relaxed">
-          The peak or page you're looking for doesn't exist or has moved. Return to TrendlyInside to analyze your content.
-        </p>
-      </div>
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <a href="/" className="btn-primary text-sm py-2.5 px-5">
-          Go Home
-        </a>
-        <a href="/youtube-video-analyzer" className="btn-secondary text-sm py-2.5 px-5">
-          Analyze a Video
-        </a>
-      </div>
-    </div>
-  );
-}
-
 /* ── App ── */
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+      <RouteTracker />
       <div className="min-h-screen flex flex-col bg-[#F4F7FB]">
         <Navbar />
         <main className="flex-1">
@@ -119,6 +99,8 @@ export default function App() {
               <Route path="/blog/:slug"     element={<BlogPostPage />} />
               <Route path="/about"          element={<AboutPage />} />
               <Route path="/contact"        element={<ContactPage />} />
+              <Route path="/thank-you"      element={<ThankYouPage />} />
+              <Route path="/privacy"        element={<PrivacyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPage />} />
               <Route path="/terms"          element={<TermsPage />} />
 
@@ -128,6 +110,7 @@ export default function App() {
           </Suspense>
         </main>
         <Footer />
+        <CookieConsent />
       </div>
     </BrowserRouter>
   );

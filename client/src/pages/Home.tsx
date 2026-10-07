@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import { YoutubeIcon } from '../components/AnalysisComponents';
 import { ScoreCircle, ScoreCard } from '../components/ScoreComponents';
+import FaqSection from '../components/FaqSection';
+import { useSEO } from '../lib/seo';
 
 /* ── Stable Particle Coordinates for Hero ───────────────────── */
 const PARTICLES = Array.from({ length: 12 }, (_, i) => ({
@@ -234,6 +236,12 @@ const BLOG_PREVIEWS = [
 ];
 
 export default function HomePage() {
+  useSEO({
+    title: 'Free AI YouTube Video & Channel Intelligence',
+    description: 'Analyze YouTube videos, Shorts, and channels with AI. Get hook scores, retention insights, growth roadmaps, and viral rewrites — 100% free with no login required.',
+    path: '/',
+  });
+
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
   const [showDemoModal, setShowDemoModal] = useState(false);
@@ -757,6 +765,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════ FAQ SECTION ══════════════════════ */}
+      <FaqSection />
 
       {/* ══════════════════════ BLOG PREVIEWS ══════════════════════ */}
       <section className="section bg-white" aria-label="Creator Intelligence Blog">

@@ -3,9 +3,9 @@ import { useSEO } from '../lib/seo';
 
 export function PrivacyPage() {
   useSEO({
-    title: 'Privacy Policy — TrendlyInside',
-    description: 'TrendlyInside privacy policy. We require no user registration, no authentication, and process YouTube URLs with anonymous analytics.',
-    path: '/privacy-policy',
+    title: 'Privacy Policy & Data Security | TrendlyInside',
+    description: 'Learn how TrendlyInside protects creator privacy with our no-login, no-subscription approach, anonymous analytics, and zero-tracking policy.',
+    path: '/privacy',
   });
 
   return (
@@ -13,37 +13,72 @@ export function PrivacyPage() {
       <div className="pt-28 md:pt-32 pb-14 border-b border-glacial-sky/20" style={{ background: 'linear-gradient(135deg, #F7FAFC 0%, #E8F0F7 100%)' }}>
         <div className="container-main">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="badge-primary mb-3 inline-flex text-xs">Transparent &amp; No-Login</span>
             <h1 className="font-heading font-bold text-3xl md:text-4xl text-midnight-abyss mb-2">Privacy Policy</h1>
             <p className="text-frosty-slate text-sm">Last updated: October 2026</p>
           </motion.div>
         </div>
       </div>
       <div className="container-main py-10">
-        <div className="max-w-3xl mx-auto card p-8 prose prose-sm text-midnight-abyss">
-          <h2 className="font-heading font-bold text-xl mb-3">1. Information We Collect</h2>
-          <p className="text-frosty-slate mb-4">TrendlyInside does not require user registration or authentication. We collect only anonymous usage data to improve our service:</p>
-          <ul className="space-y-1.5 text-frosty-slate text-sm mb-6">
-            <li>• Analysis type (video, shorts, channel)</li>
-            <li>• Timestamp of requests</li>
-            <li>• Basic browser and device information (via analytics)</li>
-            <li>• Page views and tool usage statistics</li>
-          </ul>
-          <p className="text-frosty-slate mb-6">We do NOT collect names, email addresses, or personal information unless you contact us directly via our contact form.</p>
+        <div className="max-w-3xl mx-auto card p-8 prose prose-sm text-midnight-abyss space-y-6">
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">1. Zero-Account Product Philosophy</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed">
+              TrendlyInside is intentionally built as a free, friction-free tool. We do <strong>not</strong> require user accounts, passwords, social logins (Google, Apple), credit card details, or subscription billing. You can analyze videos and generate ideas immediately without creating a profile.
+            </p>
+          </div>
 
-          <h2 className="font-heading font-bold text-xl mb-3">2. Analytics</h2>
-          <p className="text-frosty-slate mb-6">We use Google Analytics and PostHog to understand how our tools are used. These services may collect anonymized data such as IP addresses, browser type, and pages visited. You can opt out of Google Analytics using the <a href="https://tools.google.com/dlpage/gaoptout" className="text-fjord-blue hover:underline">Google Analytics Opt-out Browser Add-on</a>.</p>
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">2. Information Collected via Forms &amp; Tools</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed mb-3">
+              We collect information only when explicitly submitted through our interactive tools:
+            </p>
+            <ul className="space-y-2 text-frosty-slate text-sm list-disc pl-5">
+              <li><strong>Contact Form:</strong> When you submit a question or issue on our <a href="/contact" className="text-fjord-blue underline">Contact page</a>, we collect your name, email address, topic, and message to respond to your request. Forms use a hidden honeypot field (<code>_gotcha</code>) to trap automated spam without requiring intrusive captchas.</li>
+              <li><strong>Analyzer Tools:</strong> When you enter a public YouTube video, Short, or channel link, we retrieve publicly available metadata (video title, duration, thumbnail, and public transcript) to generate content coaching scores. We do not inspect private or unlisted videos.</li>
+              <li><strong>Generator Tools:</strong> Topics, niches, creator stages, and goals provided in the Hook, Idea, and Roadmap generators are processed on the server to formulate recommendations and cached temporarily to prevent redundant processing.</li>
+            </ul>
+          </div>
 
-          <h2 className="font-heading font-bold text-xl mb-3">3. Advertising</h2>
-          <p className="text-frosty-slate mb-6">We use Google AdSense to display ads. Google may use cookies to personalize ads based on your browsing history. You can opt out through <a href="https://adssettings.google.com" className="text-fjord-blue hover:underline">Google Ad Settings</a>.</p>
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">3. Cookies &amp; Local Storage</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed mb-3">
+              We use minimal browser storage strictly necessary for user experience:
+            </p>
+            <ul className="space-y-2 text-frosty-slate text-sm list-disc pl-5">
+              <li><code>trendly_cookie_consent</code>: Stores your cookie preference (<code>granted</code> or <code>denied</code>) locally in your browser so we do not prompt you repeatedly.</li>
+              <li><code>saved_ideas</code>: Stores bookmarked content ideas locally on your device for your convenience. This data remains on your machine and is never uploaded to our servers.</li>
+              <li><strong>Analytics Cookies:</strong> When consent is granted, Google Analytics sets first-party cookies (<code>_ga</code>, <code>_ga_*</code>) to distinguish unique sessions anonymously.</li>
+            </ul>
+          </div>
 
-          <h2 className="font-heading font-bold text-xl mb-3">4. YouTube URLs</h2>
-          <p className="text-frosty-slate mb-6">When you paste a YouTube URL for analysis, we temporarily process the URL to retrieve publicly available metadata and generate AI insights. URLs are not permanently stored in association with any user.</p>
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">4. Analytics (Google Analytics 4)</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed">
+              We use Google Analytics 4 (Measurement ID: <code>G-XXXXXXXXXX</code>) with IP anonymization enabled to understand aggregate platform usage, popular tool features, and visitor conversion paths. For visitors in the EU, UK, and Switzerland, analytics cookies are <strong>only loaded after you click "Accept Cookies"</strong> on our consent banner. You can decline or change preferences at any time.
+            </p>
+          </div>
 
-          <h2 className="font-heading font-bold text-xl mb-3">5. Cookies</h2>
-          <p className="text-frosty-slate mb-6">We use essential cookies for service functionality and third-party cookies from Google Analytics and AdSense. You can control cookies through your browser settings.</p>
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">5. Third-Party AI Processing</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed">
+              AI analysis requests are processed server-side through OpenRouter API integrations (models including DeepSeek, Google Gemma, Qwen, and Meta Llama). No personally identifiable information (PII), email addresses, or private credentials are sent to AI model providers.
+            </p>
+          </div>
 
-          <h2 className="font-heading font-bold text-xl mb-3">6. Contact</h2>
-          <p className="text-frosty-slate">For privacy-related questions, contact us at <a href="mailto:privacy@trendlyinside.com" className="text-fjord-blue hover:underline">privacy@trendlyinside.com</a>.</p>
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">6. Security &amp; Encryption</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed">
+              All data transmitted to and from TrendlyInside is encrypted in transit using industry-standard TLS (HTTPS). We implement automated rate-limiting to protect against denial-of-service and automated harvesting.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-heading font-bold text-xl mb-2 text-midnight-abyss">7. Contact Us</h2>
+            <p className="text-frosty-slate text-sm leading-relaxed">
+              For any privacy or data inquiries, reach out directly at <a href="mailto:privacy@trendlyinside.com" className="text-fjord-blue underline">privacy@trendlyinside.com</a> or via our <a href="/contact" className="text-fjord-blue underline">Contact form</a>.
+            </p>
+          </div>
         </div>
       </div>
     </>
