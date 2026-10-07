@@ -5,7 +5,8 @@ import {
   Search, Zap, Lightbulb, Map, BarChart2,
   CheckCircle, ArrowRight, Play, Video, Film, Music2,
   Image as ImageIcon, Users, Bot, Sparkles, Database,
-  X, AlertCircle, ChevronRight, Eye, ShieldCheck
+  Calendar, TrendingUp, Award, Activity,
+  X, AlertCircle, Eye, ShieldCheck
 } from 'lucide-react';
 import { YoutubeIcon } from '../components/AnalysisComponents';
 import { ScoreCircle, ScoreCard } from '../components/ScoreComponents';
@@ -55,107 +56,269 @@ function getDetectedBadge(type: DetectedType) {
   }
 }
 
-/* ── 6 Core Product Tools ──────────────────────────────────── */
-const CORE_TOOLS = [
+/* ── 17 Complete AI Creator Tools Directory ───────────────── */
+export type ToolCategory = 'all' | 'video' | 'packaging' | 'strategy' | 'intelligence';
+
+export interface CreatorToolItem {
+  id: string;
+  category: 'video' | 'packaging' | 'strategy' | 'intelligence';
+  categoryBadge: string;
+  icon: React.ReactNode;
+  iconBg: string;
+  title: string;
+  desc: string;
+  result: string;
+  href: string;
+  cta: string;
+  badge: string;
+  isPopular?: boolean;
+}
+
+const CATEGORIES: { id: ToolCategory; label: string; count: number }[] = [
+  { id: 'all', label: 'All 17 Creator Tools', count: 17 },
+  { id: 'video', label: 'Video & Short-Form', count: 6 },
+  { id: 'packaging', label: 'Packaging & Hooks', count: 3 },
+  { id: 'strategy', label: 'Strategy & Planning', count: 3 },
+  { id: 'intelligence', label: 'AI Copilot & Data', count: 5 },
+];
+
+const ALL_CREATOR_TOOLS: CreatorToolItem[] = [
+  // ── 1. Video & Short-Form Audits (6 Tools) ──
   {
+    id: 'yt-video',
+    category: 'video',
+    categoryBadge: 'YouTube',
     icon: <Video className="w-5 h-5 text-red-600" />,
     iconBg: 'bg-red-50 text-red-600 border-red-100',
     title: 'YouTube Video Analyzer',
-    desc: 'Find weak hooks, storytelling gaps and engagement opportunities.',
-    result: 'Detailed scores on Hook, Retention, Storytelling, and CTA with concrete rewrites.',
+    desc: 'Audit weak hooks, retention dips, and narrative pacing in long-form videos.',
+    result: 'Scores on Hook, Retention, Storytelling, and CTA with concrete script rewrites.',
     href: '/youtube-video-analyzer',
     cta: 'Analyze Video',
-    badge: 'Core Tool',
+    badge: 'Flagship Tool',
+    isPopular: true,
   },
   {
+    id: 'yt-shorts',
+    category: 'video',
+    categoryBadge: 'Shorts',
     icon: <Play className="w-5 h-5 text-purple-600" />,
     iconBg: 'bg-purple-50 text-purple-600 border-purple-100',
     title: 'YouTube Shorts Analyzer',
-    desc: 'Evaluate first 3 seconds, pacing, and viral potential for short-form.',
-    result: 'First 3-second drop-off audit, loop potential, and scroll-stopping improvements.',
+    desc: 'Evaluate the critical first 3 seconds, pacing velocity, and loop completion.',
+    result: 'First 3-second drop-off audit, loop potential score, and scroll-stopping tweaks.',
     href: '/youtube-shorts-analyzer',
     cta: 'Analyze Shorts',
-    badge: 'High Viral Impact',
+    badge: 'High Velocity',
+    isPopular: true,
   },
   {
+    id: 'yt-channel',
+    category: 'video',
+    categoryBadge: 'Channel',
     icon: <BarChart2 className="w-5 h-5 text-fjord-blue" />,
     iconBg: 'bg-blue-50 text-fjord-blue border-blue-100',
     title: 'YouTube Channel Analyzer',
-    desc: 'Audit channel consistency, topic clarity, and 30-day creator roadmap.',
-    result: 'Creator Score, niche alignment, brand consistency, and custom growth plan.',
+    desc: 'Audit channel consistency, upload cadence, topic clarity, and viewer retention.',
+    result: 'Creator Score, niche alignment rating, brand consistency, and custom growth plan.',
     href: '/youtube-channel-analyzer',
     cta: 'Analyze Channel',
     badge: 'Strategic Audit',
+    isPopular: true,
   },
   {
+    id: 'ig-reels',
+    category: 'video',
+    categoryBadge: 'Instagram',
+    icon: <Film className="w-5 h-5 text-pink-600" />,
+    iconBg: 'bg-pink-50 text-pink-600 border-pink-100',
+    title: 'Instagram Reel Analyzer',
+    desc: 'Evaluate hook pacing, audio synergy, and Instagram Explore ranking factors.',
+    result: 'Audio selection score, visual hook rating, and Explore page distribution potential.',
+    href: '/instagram-reel-analyzer',
+    cta: 'Analyze Reel',
+    badge: 'Explore Reach',
+    isPopular: true,
+  },
+  {
+    id: 'tiktok',
+    category: 'video',
+    categoryBadge: 'TikTok',
+    icon: <Music2 className="w-5 h-5 text-cyan-600" />,
+    iconBg: 'bg-cyan-50 text-cyan-600 border-cyan-100',
+    title: 'TikTok Video Analyzer',
+    desc: 'Test sub-second micro-hooks, sound momentum, and FYP algorithm triggers.',
+    result: 'FYP virality score, sound synergy rating, and watch-time completion tweaks.',
+    href: '/tiktok-analyzer',
+    cta: 'Analyze TikTok',
+    badge: 'FYP Algorithm',
+    isPopular: true,
+  },
+  {
+    id: 'competitor',
+    category: 'video',
+    categoryBadge: 'Benchmarking',
+    icon: <Users className="w-5 h-5 text-indigo-600" />,
+    iconBg: 'bg-indigo-50 text-indigo-600 border-indigo-100',
+    title: 'Competitor Channel Analyzer',
+    desc: 'Compare two creator channels head-to-head to uncover packaging and topic gaps.',
+    result: 'Direct metric comparison, content gap opportunities, and differentiation angles.',
+    href: '/competitor-analyzer',
+    cta: 'Compare Rivals',
+    badge: 'Head-to-Head',
+  },
+
+  // ── 2. Packaging, Hooks & Ideas (3 Tools) ──
+  {
+    id: 'thumbnail',
+    category: 'packaging',
+    categoryBadge: 'Packaging',
+    icon: <ImageIcon className="w-5 h-5 text-amber-600" />,
+    iconBg: 'bg-amber-50 text-amber-600 border-amber-100',
+    title: 'Thumbnail CTR Analyzer',
+    desc: 'Test visual hierarchy, emotional contrast, text legibility, and click psychology.',
+    result: 'Predicted CTR score, visual focal points, face emotion rating, and Canva layout tips.',
+    href: '/thumbnail-analyzer',
+    cta: 'Analyze Thumbnail',
+    badge: 'CTR Predictor',
+    isPopular: true,
+  },
+  {
+    id: 'hooks',
+    category: 'packaging',
+    categoryBadge: 'Hooks',
     icon: <Zap className="w-5 h-5 text-amber-600" />,
     iconBg: 'bg-amber-50 text-amber-600 border-amber-100',
-    title: 'Hook Generator',
-    desc: 'Generate 20 high-converting hooks across 6 psychological categories.',
+    title: 'Viral Hook Generator',
+    desc: 'Generate 20 high-converting hooks across 6 psychological curiosity frameworks.',
     result: 'Curiosity, Story, Authority, Contrarian, Problem-Based, and Emotional hooks.',
     href: '/hook-generator',
     cta: 'Generate Hooks',
     badge: '20 Formats',
+    isPopular: true,
   },
   {
+    id: 'ideas',
+    category: 'packaging',
+    categoryBadge: 'Ideation',
     icon: <Lightbulb className="w-5 h-5 text-emerald-600" />,
     iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
     title: 'Viral Idea Generator',
-    desc: 'Generate 50 niche-tailored video concepts with format directions.',
+    desc: 'Generate 50 niche-tailored video concepts with format directions and hooks.',
     result: 'Educational, Storytelling, Challenge, and Trend-based ideas ready to script.',
     href: '/viral-idea-generator',
     cta: 'Generate Ideas',
-    badge: '50 Ideas',
+    badge: '50 Concepts',
   },
+
+  // ── 3. Strategy & Growth Planning (3 Tools) ──
   {
+    id: 'roadmap',
+    category: 'strategy',
+    categoryBadge: 'Roadmap',
     icon: <Map className="w-5 h-5 text-teal-600" />,
     iconBg: 'bg-teal-50 text-teal-600 border-teal-100',
     title: 'Growth Roadmap Generator',
-    desc: 'Build a personalized 4-week milestone strategy for channel growth.',
-    result: 'Weekly objectives, prioritized actions, estimated effort, and success signals.',
+    desc: 'Build a personalized 4-week milestone strategy tailored to your creator stage.',
+    result: 'Weekly objectives, prioritized action tasks, effort estimates, and success signals.',
     href: '/growth-roadmap-generator',
     cta: 'Build Roadmap',
     badge: '30-Day Plan',
   },
-];
+  {
+    id: 'calendar',
+    category: 'strategy',
+    categoryBadge: 'Schedule',
+    icon: <Calendar className="w-5 h-5 text-blue-600" />,
+    iconBg: 'bg-blue-50 text-blue-600 border-blue-100',
+    title: 'Content Calendar Generator',
+    desc: 'Create an automated 30-day cross-platform publishing calendar for consistency.',
+    result: '30-day scheduled upload dates, content pillars, script milestones, and formats.',
+    href: '/content-calendar-generator',
+    cta: 'Create Calendar',
+    badge: 'Cross-Platform',
+  },
+  {
+    id: 'trend-discovery',
+    category: 'strategy',
+    categoryBadge: 'Trends',
+    icon: <TrendingUp className="w-5 h-5 text-violet-600" />,
+    iconBg: 'bg-violet-50 text-violet-600 border-violet-100',
+    title: 'Trend Discovery Engine',
+    desc: 'Discover breakout niche keywords, rising formats, and search velocity spikes.',
+    result: 'Breakout query list, trend growth curve, creator competition, and video angles.',
+    href: '/trend-discovery',
+    cta: 'Discover Trends',
+    badge: 'Breakout Topics',
+    isPopular: true,
+  },
 
-/* ── Secondary Specialized Tools ────────────────────────────── */
-const MORE_TOOLS = [
+  // ── 4. AI Intelligence & Advanced Data (5 Tools) ──
   {
-    icon: <ImageIcon className="w-4 h-4 text-amber-600" />,
-    title: 'Thumbnail CTR Analyzer',
-    desc: 'Visual hierarchy, contrast & emotional scoring for thumbnails.',
-    href: '/thumbnail-analyzer',
-  },
-  {
-    icon: <Film className="w-4 h-4 text-pink-600" />,
-    title: 'Instagram Reel Analyzer',
-    desc: 'Audio selection, pacing & Explore page reach diagnostics.',
-    href: '/instagram-reel-analyzer',
-  },
-  {
-    icon: <Music2 className="w-4 h-4 text-cyan-600" />,
-    title: 'TikTok Video Analyzer',
-    desc: 'Sub-second hooks, audio trends & FYP loop potential.',
-    href: '/tiktok-analyzer',
-  },
-  {
-    icon: <Users className="w-4 h-4 text-indigo-600" />,
-    title: 'Competitor Channel Analyzer',
-    desc: 'Side-by-side rival comparison to uncover content gaps.',
-    href: '/competitor-analyzer',
-  },
-  {
-    icon: <Bot className="w-4 h-4 text-fjord-blue" />,
+    id: 'assistant',
+    category: 'intelligence',
+    categoryBadge: 'AI Copilot',
+    icon: <Bot className="w-5 h-5 text-fjord-blue" />,
+    iconBg: 'bg-blue-50 text-fjord-blue border-blue-100',
     title: 'AI Creator Assistant',
-    desc: 'Interactive script rewrite copilot and tactical growth coach.',
+    desc: 'Interactive chat copilot for instant script rewriting, title testing & coaching.',
+    result: 'Real-time conversational creator coaching, script polishing, and tactical answers.',
     href: '/creator-assistant',
+    cta: 'Chat with AI',
+    badge: 'Conversational',
+    isPopular: true,
   },
   {
-    icon: <Database className="w-4 h-4 text-purple-600" />,
+    id: 'trend-prediction',
+    category: 'intelligence',
+    categoryBadge: 'Predictive',
+    icon: <Sparkles className="w-5 h-5 text-rose-600" />,
+    iconBg: 'bg-rose-50 text-rose-600 border-rose-100',
+    title: 'Trend Prediction Engine',
+    desc: 'Forecast topic longevity, algorithmic saturation, and optimal upload windows.',
+    result: 'Shelf-life forecast, trend velocity graph, fatigue index, and timing window.',
+    href: '/trend-prediction',
+    cta: 'Predict Trends',
+    badge: 'Predictive ML',
+  },
+  {
+    id: 'database',
+    category: 'intelligence',
+    categoryBadge: 'Case Studies',
+    icon: <Database className="w-5 h-5 text-purple-600" />,
+    iconBg: 'bg-purple-50 text-purple-600 border-purple-100',
     title: 'Viral Content Database',
-    desc: '30+ viral breakdown formulas across high-performing creators.',
+    desc: 'Deconstruct 30+ verified viral video case studies with hook and pacing breakdowns.',
+    result: 'Full retention anatomy, inflection points, psychological triggers, and templates.',
     href: '/viral-database',
+    cta: 'Browse Database',
+    badge: 'Case Studies',
+  },
+  {
+    id: 'benchmarking',
+    category: 'intelligence',
+    categoryBadge: 'Percentiles',
+    icon: <Award className="w-5 h-5 text-amber-600" />,
+    iconBg: 'bg-amber-50 text-amber-600 border-amber-100',
+    title: 'Creator Benchmarking',
+    desc: 'Benchmark your channel metrics against top 10%, 25%, and 50% creators in your niche.',
+    result: 'Percentile rankings on views, engagement, upload velocity, and pacing targets.',
+    href: '/creator-benchmarking',
+    cta: 'View Benchmarks',
+    badge: 'Top 10% Tiers',
+  },
+  {
+    id: 'analytics',
+    category: 'intelligence',
+    categoryBadge: 'Deep Data',
+    icon: <Activity className="w-5 h-5 text-emerald-600" />,
+    iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+    title: 'Advanced Analytics',
+    desc: 'Deep audit of packaging fatigue, multi-format synergy, and retention drop-offs.',
+    result: 'Multi-platform funnel efficiency, thumbnail decay curve, and bottleneck diagnosis.',
+    href: '/advanced-analytics',
+    cta: 'View Deep Data',
+    badge: 'Deep Audit',
   },
 ];
 
@@ -245,17 +408,22 @@ export default function HomePage() {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
   const [showDemoModal, setShowDemoModal] = useState(false);
-  const [showMoreTools, setShowMoreTools] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<ToolCategory>('all');
   const navigate = useNavigate();
 
   const particles = useMemo(() => PARTICLES, []);
   const detectedType = useMemo(() => detectUrlType(url), [url]);
   const detectedBadge = useMemo(() => getDetectedBadge(detectedType), [detectedType]);
 
+  const filteredTools = useMemo(() => {
+    if (selectedCategory === 'all') return ALL_CREATOR_TOOLS;
+    return ALL_CREATOR_TOOLS.filter((t) => t.category === selectedCategory);
+  }, [selectedCategory]);
+
   const handleAnalyze = () => {
     const trimmed = url.trim();
     if (!trimmed) {
-      setError("Please paste a YouTube video, Short, or channel link to analyze.");
+      setError("Please paste a YouTube, Shorts, Instagram Reel, or TikTok link to analyze.");
       return;
     }
 
@@ -277,7 +445,7 @@ export default function HomePage() {
       setError('');
       navigate(`/tiktok-analyzer?url=${encodeURIComponent(trimmed)}`);
     } else {
-      setError("We couldn't recognize that YouTube link. Try a video, Short, or channel URL.");
+      setError("Please paste a valid YouTube, Shorts, Instagram Reel, or TikTok URL.");
     }
   };
 
@@ -388,9 +556,9 @@ export default function HomePage() {
                     if (error) setError('');
                   }}
                   onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-                  placeholder="Paste a YouTube video, Short, or channel URL"
+                  placeholder="Paste a YouTube, Shorts, Instagram Reel, or TikTok link..."
                   className="w-full py-3.5 text-midnight-abyss placeholder-slate-400 bg-transparent focus:outline-none text-sm md:text-base font-normal"
-                  aria-label="YouTube video, Short, or channel URL"
+                  aria-label="Video or channel URL"
                 />
               </div>
               <button
@@ -418,10 +586,35 @@ export default function HomePage() {
               )}
             </AnimatePresence>
 
-            {/* Microcopy */}
-            <p className="mt-3.5 text-glacial-sky/95 text-xs md:text-sm font-medium tracking-wide">
-              Free • No signup • Instant AI insights
+            {/* Microcopy & Quick Jump Chips */}
+            <p className="mt-3 text-glacial-sky/95 text-xs md:text-sm font-medium tracking-wide">
+              Free • No signup • 17 AI Creator Tools Included
             </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-3.5 text-xs">
+              <span className="text-glacial-sky/75 font-medium">Quick Access:</span>
+              <Link to="/youtube-video-analyzer" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                Video
+              </Link>
+              <Link to="/youtube-shorts-analyzer" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                Shorts
+              </Link>
+              <Link to="/instagram-reel-analyzer" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                Reels
+              </Link>
+              <Link to="/tiktok-analyzer" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                TikTok
+              </Link>
+              <Link to="/thumbnail-analyzer" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                Thumbnail CTR
+              </Link>
+              <Link to="/creator-assistant" className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors">
+                AI Copilot
+              </Link>
+              <a href="#tools" className="px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-[#FADADD] font-semibold transition-colors flex items-center gap-1">
+                <span>All 17 Tools ↓</span>
+              </a>
+            </div>
           </motion.div>
 
           {/* Secondary CTA: Demo Analysis */}
@@ -505,35 +698,67 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════ PRODUCT TOOLS GRID ══════════════════════ */}
+      {/* ══════════════════════ PRODUCT TOOLS SUITE (17 TOOLS) ══════════════════════ */}
       <section id="tools" className="section bg-section-alt" aria-label="Product Tools">
         <div className="container-main">
-          <div className="text-center mb-12">
-            <span className="badge-primary mb-3">AI Creator Intelligence Platform</span>
-            <h2 className="section-title mt-2">Six Core Creator Tools</h2>
-            <p className="section-subtitle">
-              Every tool is purpose-built to diagnose retention, sharpen packaging, and accelerate channel growth.
+          <div className="text-center mb-10">
+            <span className="badge-primary mb-3">Complete Creator Intelligence Suite</span>
+            <h2 className="section-title mt-2">17 Specialized AI Creator Tools</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              From YouTube and TikTok retention audits to thumbnail CTR predictors, content calendars, and predictive trend forecasts—everything you need to grow without guessing.
             </p>
           </div>
 
-          {/* 6 Core Tools Grid */}
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-2 ${
+                  selectedCategory === cat.id
+                    ? 'bg-midnight-abyss text-white shadow-btn'
+                    : 'bg-white text-midnight-abyss/80 hover:bg-glacial-sky/20 border border-glacial-sky/35'
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span
+                  className={`text-2xs px-2 py-0.5 rounded-full font-bold ${
+                    selectedCategory === cat.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-glacial-sky/30 text-fjord-blue'
+                  }`}
+                >
+                  {cat.count}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* 17 Tools Grid (All or Filtered) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {CORE_TOOLS.map((tool) => (
+            {filteredTools.map((tool) => (
               <div
-                key={tool.title}
-                className="tool-card flex flex-col justify-between"
+                key={tool.id}
+                className="tool-card flex flex-col justify-between hover:border-glacial-sky/80 hover:shadow-card-hover transition-all group"
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center border ${tool.iconBg}`}>
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center border ${tool.iconBg} group-hover:scale-105 transition-transform`}>
                       {tool.icon}
                     </div>
-                    <span className="badge-primary text-2xs font-semibold py-0.5 px-2">
-                      {tool.badge}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-2xs font-bold uppercase tracking-wider text-frosty-slate">
+                        {tool.categoryBadge}
+                      </span>
+                      <span className="badge-primary text-2xs font-semibold py-0.5 px-2">
+                        {tool.badge}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3 className="font-heading font-bold text-xl text-midnight-abyss mb-2">
+                  <h3 className="font-heading font-bold text-xl text-midnight-abyss group-hover:text-fjord-blue transition-colors mb-2">
                     {tool.title}
                   </h3>
                   <p className="text-midnight-abyss/85 text-sm font-medium mb-2.5">
@@ -546,58 +771,14 @@ export default function HomePage() {
 
                 <Link
                   to={tool.href}
-                  className="btn-secondary w-full text-sm py-2.5 justify-center group"
+                  className="btn-secondary w-full text-sm py-2.5 justify-center group/btn"
                 >
                   <span>{tool.cta}</span>
-                  <ArrowRight className="w-4 h-4 text-fjord-blue group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-fjord-blue group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </div>
             ))}
           </div>
-
-          {/* Optional More Tools Accordion */}
-          <div className="text-center mt-6">
-            <button
-              onClick={() => setShowMoreTools(!showMoreTools)}
-              className="btn-ghost text-sm text-fjord-blue font-semibold inline-flex items-center gap-1.5"
-            >
-              <span>{showMoreTools ? 'Hide Specialized Tools' : 'Explore More Specialized Tools (Reels, TikTok, Thumbnails)'}</span>
-              <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${showMoreTools ? 'rotate-90' : ''}`} />
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {showMoreTools && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="overflow-hidden mt-6 pt-6 border-t border-glacial-sky/25"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {MORE_TOOLS.map((tool) => (
-                    <Link
-                      key={tool.title}
-                      to={tool.href}
-                      className="card p-4 flex items-start gap-3 hover:border-glacial-sky/60 hover:-translate-y-0.5 transition-all"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-glacial-sky/20 flex items-center justify-center shrink-0 mt-0.5">
-                        {tool.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-sm text-midnight-abyss mb-0.5">
-                          {tool.title}
-                        </h4>
-                        <p className="text-xs text-frosty-slate leading-relaxed">
-                          {tool.desc}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </section>
 

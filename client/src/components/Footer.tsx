@@ -36,53 +36,82 @@ export default function Footer() {
 
       {/* Main Footer Columns */}
       <div className="container-main py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand & Positioning */}
-          <div className="lg:col-span-2">
+          <div>
             <Link to="/" className="flex items-center gap-2.5 mb-4 group w-fit">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-fjord-blue to-glacial-sky flex items-center justify-center group-hover:scale-105 transition-transform">
                 <Zap className="w-4 h-4 text-white fill-white" />
               </div>
               <span className="font-heading font-bold text-xl text-white">TrendlyInside</span>
             </Link>
-            <p className="text-frosty-slate text-sm leading-relaxed max-w-sm mb-4">
-              AI creator intelligence for better content decisions. Discover what works, what hurts retention, and exactly what to improve next.
+            <p className="text-frosty-slate text-xs leading-relaxed max-w-sm mb-4">
+              AI creator intelligence for better content decisions. Discover what hurts retention and exactly what to optimize next.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-glacial-sky">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              100% Free · No Signup Required
+              100% Free · 17 AI Tools
             </div>
           </div>
 
-          {/* Product (Core 6 Tools) */}
+          {/* Video & Social Audits */}
           <div>
-            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-4">
-              Product
+            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-3">
+              Video &amp; Social
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/youtube-video-analyzer" className="text-frosty-slate hover:text-white transition-colors">
-                  Video Analyzer
+                  YouTube Video Analyzer
                 </Link>
               </li>
               <li>
                 <Link to="/youtube-shorts-analyzer" className="text-frosty-slate hover:text-white transition-colors">
-                  Shorts Analyzer
+                  YouTube Shorts Analyzer
                 </Link>
               </li>
               <li>
                 <Link to="/youtube-channel-analyzer" className="text-frosty-slate hover:text-white transition-colors">
-                  Channel Analyzer
+                  YouTube Channel Analyzer
+                </Link>
+              </li>
+              <li>
+                <Link to="/instagram-reel-analyzer" className="text-frosty-slate hover:text-white transition-colors">
+                  Instagram Reel Analyzer
+                </Link>
+              </li>
+              <li>
+                <Link to="/tiktok-analyzer" className="text-frosty-slate hover:text-white transition-colors">
+                  TikTok Video Analyzer
+                </Link>
+              </li>
+              <li>
+                <Link to="/competitor-analyzer" className="text-frosty-slate hover:text-white transition-colors">
+                  Competitor Analyzer
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Packaging & Strategy */}
+          <div>
+            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-3">
+              Packaging &amp; Strategy
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/thumbnail-analyzer" className="text-frosty-slate hover:text-white transition-colors">
+                  Thumbnail CTR Analyzer
                 </Link>
               </li>
               <li>
                 <Link to="/hook-generator" className="text-frosty-slate hover:text-white transition-colors">
-                  Hook Generator
+                  Viral Hook Generator
                 </Link>
               </li>
               <li>
                 <Link to="/viral-idea-generator" className="text-frosty-slate hover:text-white transition-colors">
-                  Idea Generator
+                  Viral Idea Generator
                 </Link>
               </li>
               <li>
@@ -90,15 +119,59 @@ export default function Footer() {
                   Growth Roadmap
                 </Link>
               </li>
+              <li>
+                <Link to="/content-calendar-generator" className="text-frosty-slate hover:text-white transition-colors">
+                  Content Calendar
+                </Link>
+              </li>
+              <li>
+                <Link to="/trend-discovery" className="text-frosty-slate hover:text-white transition-colors">
+                  Trend Discovery Engine
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* AI Intelligence & Data */}
           <div>
-            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-4">
-              Resources
+            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-3">
+              AI Intelligence
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/creator-assistant" className="text-frosty-slate hover:text-white transition-colors">
+                  AI Creator Assistant
+                </Link>
+              </li>
+              <li>
+                <Link to="/trend-prediction" className="text-frosty-slate hover:text-white transition-colors">
+                  Trend Prediction Engine
+                </Link>
+              </li>
+              <li>
+                <Link to="/viral-database" className="text-frosty-slate hover:text-white transition-colors">
+                  Viral Content Database
+                </Link>
+              </li>
+              <li>
+                <Link to="/creator-benchmarking" className="text-frosty-slate hover:text-white transition-colors">
+                  Creator Benchmarking
+                </Link>
+              </li>
+              <li>
+                <Link to="/advanced-analytics" className="text-frosty-slate hover:text-white transition-colors">
+                  Advanced Analytics
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company & Legal */}
+          <div>
+            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-3">
+              Company &amp; Legal
+            </h4>
+            <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/blog" className="text-frosty-slate hover:text-white transition-colors">
                   Creator Blog
@@ -114,25 +187,6 @@ export default function Footer() {
                   Contact Support
                 </Link>
               </li>
-              <li>
-                <Link to="/creator-assistant" className="text-frosty-slate hover:text-white transition-colors">
-                  AI Creator Assistant
-                </Link>
-              </li>
-              <li>
-                <Link to="/viral-database" className="text-frosty-slate hover:text-white transition-colors">
-                  Viral Case Studies
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="text-xs font-bold text-glacial-sky uppercase tracking-wider mb-4">
-              Legal
-            </h4>
-            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/privacy" className="text-frosty-slate hover:text-white transition-colors">
                   Privacy Policy
