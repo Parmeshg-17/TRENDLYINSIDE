@@ -29,13 +29,34 @@ app.use(helmet({
   } : false,
 }));
 
-// CORS
+// CORS configuration supporting local dev, custom domain, and Vercel deployments
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://trendlyinside.com',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    process.env.FRONTEND_URL || 'https://trendlyinside.com'
-  ],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    try {
+      const hostname = new URL(origin).hostname;
+      if (
+        allowedOrigins.includes(origin) ||
+        hostname.endsWith('.vercel.app') ||
+        origin === process.env.FRONTEND_URL
+      ) {
+        return callback(null, true);
+      }
+    } catch {
+      // ignore URL parsing error
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));

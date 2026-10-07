@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { logAnalysis: supabaseLog, recordQuery: supabaseQuery } = require('./supabaseService');
 
 // In-memory analytics store for anonymous metrics tracking
 // Matches schema in PRD.md and Technical Documentation.md:
@@ -23,6 +24,12 @@ function logAnalysis(urlType, analysisType, query = null) {
     if (query) {
       const q = query.trim().toLowerCase();
       popularQueries.set(q, (popularQueries.get(q) || 0) + 1);
+    }
+
+    // Forward to Supabase asynchronously if configured
+    supabaseLog(urlType, analysisType);
+    if (query) {
+      supabaseQuery(query);
     }
 
     return entry;
