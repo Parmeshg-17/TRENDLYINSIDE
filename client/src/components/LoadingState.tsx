@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Sparkles, Brain, Zap } from 'lucide-react';
+import { Check, Brain, Zap } from 'lucide-react';
+import { AgentWaveLoader } from '@/components/ui/agent-wave-loader';
 
 export interface LoadingStep {
   label: string;
@@ -67,68 +68,13 @@ export default function LoadingState({
 
   return (
     <div className="flex flex-col items-center justify-center py-10 px-4 max-w-xl mx-auto relative">
-      {/* ── 21st.dev Ethereal Orbital AI Radar ───────────────────── */}
-      <div className="relative mb-8 flex items-center justify-center">
-        {/* Ambient atmospheric aura */}
-        <div className="absolute -inset-8 rounded-full bg-gradient-to-tr from-[#FADADD]/40 via-[#C2D6EC]/50 to-[#4A6D99]/25 blur-2xl animate-pulse" />
-
-        {/* Outer orbital radar ring (smooth rotation) */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-          className="w-28 h-28 rounded-full border border-dashed border-[#94A9D0]/40 flex items-center justify-center relative"
-        >
-          {/* Orbital Satellite Node 1 */}
-          <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gradient-to-br from-[#4A6D99] to-[#223354] shadow-md border-2 border-white" />
-          {/* Orbital Satellite Node 2 */}
-          <div className="absolute -bottom-1 left-1/3 w-2 h-2 rounded-full bg-[#FADADD] border border-[#4A6D99]/40 shadow-sm" />
-        </motion.div>
-
-        {/* Inner Conic Sweep Beam */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-          className="absolute w-24 h-24 rounded-full p-[2px]"
-          style={{
-            background:
-              'conic-gradient(from 0deg, transparent 0 260deg, rgba(74, 109, 153, 0.4) 310deg, #FADADD 360deg)',
-          }}
-        >
-          <div className="w-full h-full rounded-full bg-transparent" />
-        </motion.div>
-
-        {/* Center Frosted Glass Orb */}
-        <motion.div
-          animate={{
-            scale: [1, 1.05, 1],
-            boxShadow: [
-              '0 8px 30px rgba(74,109,153,0.18)',
-              '0 12px 40px rgba(74,109,153,0.32)',
-              '0 8px 30px rgba(74,109,153,0.18)',
-            ],
-          }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute w-16 h-16 rounded-full bg-white/90 backdrop-blur-xl border border-white shadow-2xl flex items-center justify-center z-10"
-        >
-          {/* Dynamic Core Icon */}
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Sparkles className="w-7 h-7 text-fjord-blue drop-shadow-sm" />
-          </motion.div>
-        </motion.div>
-
-        {/* Live Processing Ping Pill */}
-        <div className="absolute -bottom-3 z-20">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-2xs font-bold uppercase tracking-wider bg-white/95 backdrop-blur-md shadow-sm border border-glacial-sky/50 text-midnight-abyss">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span>AI Reasoning</span>
-          </div>
-        </div>
+      {/* ── 21st.dev Multi-Model Wave Loader ─────────────────────── */}
+      <div className="mb-6 p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-glacial-sky/35 shadow-sm flex flex-col items-center">
+        <AgentWaveLoader
+          durationMs={2400}
+          label="Multi-Model Intelligence Processing"
+          className="scale-110"
+        />
       </div>
 
       {/* ── Heading & Subtitle ───────────────────────────────────── */}
